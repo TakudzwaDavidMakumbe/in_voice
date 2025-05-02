@@ -425,100 +425,103 @@ export default function InvoiceCreator() {
             </div>
           </div>
           
-          {/* Invoice Items */}
-          <div className="mb-6">
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="text-lg font-medium">Invoice Items</h3>
-              <button 
-                onClick={addItem}
-                className="flex items-center text-sm bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md transition-colors"
-              >
-                <Plus className="h-4 w-4 mr-1" /> Add Item
-              </button>
-            </div>
-            
-            <div className="overflow-x-auto">
-              <table className="min-w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="py-2 px-4 text-left text-sm font-medium text-gray-500">Description</th>
-                    <th className="py-2 px-4 text-left text-sm font-medium text-gray-500 w-20">Qty</th>
-                    <th className="py-2 px-4 text-left text-sm font-medium text-gray-500 w-32">Rate</th>
+        {/* Invoice Items */}
+                <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-lg font-medium">Invoice Items</h3>
+                  <button 
+                  onClick={addItem}
+                  className="flex items-center text-sm bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md transition-colors"
+                  >
+                  <Plus className="h-4 w-4 mr-1" /> Add Item
+                  </button>
+                </div>
+                
+                <div className="overflow-x-auto">
+                  <table className="min-w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50">
+                    <th className="py-2 px-4 text-left text-sm font-medium text-gray-500 w-1/2">Description</th>
+                    <th className="py-2 px-4 text-left text-sm font-medium text-gray-500 w-24">Qty</th>
+                    <th className="py-2 px-4 text-left text-sm font-medium text-gray-500 w-36">Rate</th>
                     <th className="py-2 px-4 text-left text-sm font-medium text-gray-500 w-32">Amount</th>
                     <th className="py-2 px-4 text-left text-sm font-medium text-gray-500 w-16">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentInvoice.items.map((item, index) => (
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentInvoice.items.map((item, index) => (
                     <tr key={index} className="border-b border-gray-200">
                       <td className="py-2 px-4">
-                        <input
-                          type="text"
-                          value={item.description}
-                          onChange={(e) => handleItemChange(index, 'description', e.target.value)}
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                          placeholder="Item description"
-                        />
+                      <input
+                        type="text"
+                        value={item.description}
+                        onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Item description"
+                        style={{ minWidth: '250px' }}
+                      />
                       </td>
                       <td className="py-2 px-4">
-                        <input
-                          type="number"
-                          value={item.quantity}
-                          onChange={(e) => handleItemChange(index, 'quantity', parseFloat(e.target.value) || 0)}
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                          min="0"
-                        />
+                      <input
+                        type="number"
+                        value={item.quantity}
+                        onChange={(e) => handleItemChange(index, 'quantity', parseFloat(e.target.value) || 0)}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        min="0"
+                        style={{ minWidth: '80px' }}
+                      />
                       </td>
                       <td className="py-2 px-4">
-                        <input
-                          type="number"
-                          value={item.rate}
-                          onChange={(e) => handleItemChange(index, 'rate', parseFloat(e.target.value) || 0)}
-                          className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                          min="0"
-                          step="0.01"
-                        />
+                      <input
+                        type="number"
+                        value={item.rate}
+                        onChange={(e) => handleItemChange(index, 'rate', parseFloat(e.target.value) || 0)}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        min="0"
+                        step="0.01"
+                        style={{ minWidth: '120px' }}
+                      />
                       </td>
                       <td className="py-2 px-4">
-                        <div className="p-2 border border-gray-100 bg-gray-50 rounded-md">
-                          {(item.quantity * item.rate).toFixed(2)}
-                        </div>
+                      <div className="p-2 border border-gray-100 bg-gray-50 rounded-md">
+                        {(item.quantity * item.rate).toFixed(2)}
+                      </div>
                       </td>
                       <td className="py-2 px-4">
-                        {currentInvoice.items.length > 1 && (
-                          <button 
-                            onClick={() => removeItem(index)}
-                            className="text-red-500 hover:text-red-700 transition-colors"
-                          >
-                            <Trash className="h-5 w-5" />
-                          </button>
-                        )}
+                      {currentInvoice.items.length > 1 && (
+                        <button 
+                        onClick={() => removeItem(index)}
+                        className="text-red-500 hover:text-red-700 transition-colors"
+                        >
+                        <Trash className="h-5 w-5" />
+                        </button>
+                      )}
                       </td>
                     </tr>
-                  ))}
-                </tbody>
-                <tfoot>
-                  <tr className="bg-gray-50">
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr className="bg-gray-50">
                     <td colSpan="3" className="py-2 px-4 text-right text-sm font-medium">Subtotal:</td>
                     <td className="py-2 px-4 text-sm font-medium">${currentInvoice.subtotal.toFixed(2)}</td>
                     <td></td>
-                  </tr>
-                  <tr className="bg-gray-50">
+                    </tr>
+                    <tr className="bg-gray-50">
                     <td colSpan="3" className="py-2 px-4 text-right text-sm font-medium">Tax ({currentInvoice.tax}%):</td>
                     <td className="py-2 px-4 text-sm font-medium">${(currentInvoice.subtotal * (currentInvoice.tax / 100)).toFixed(2)}</td>
                     <td></td>
-                  </tr>
-                  <tr className="bg-gray-50">
+                    </tr>
+                    <tr className="bg-gray-50">
                     <td colSpan="3" className="py-2 px-4 text-right text-sm font-bold">Total:</td>
                     <td className="py-2 px-4 text-lg font-bold">${currentInvoice.total.toFixed(2)}</td>
                     <td></td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-          
-          {/* Notes */}
+                    </tr>
+                  </tfoot>
+                  </table>
+                </div>
+                </div>
+                
+                {/* Notes */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
             <textarea
